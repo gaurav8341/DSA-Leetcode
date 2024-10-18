@@ -2,6 +2,8 @@ class Solution:
     def search(self, nums: List[int], target: int) -> int:
         l, r = 0, len(nums) - 1
 
+        ## Straight forward aproach
+
         while (l<=r):
             m = int((l+r)/2)
             print(l, r, m, nums[m], target)
