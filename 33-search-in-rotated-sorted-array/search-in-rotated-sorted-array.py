@@ -24,3 +24,9 @@ class Solution:
                     l = m + 1
 
         return -1
+
+# if above solution is too hard remember that you can run it in 2 pass.
+
+# in first pass find the pivot where array is rotated. normal array wont fulfill condition m > r
+
+# you will find pivot now depending on pivot and target value run binary search on appropriate subarray.
