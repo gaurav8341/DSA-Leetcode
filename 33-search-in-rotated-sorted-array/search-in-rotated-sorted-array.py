@@ -8,7 +8,10 @@ class Solution:
             if target == nums[m]:
                 return m
 
+            # if l <= m then its normal left subpart. 
             if nums[l] <= nums[m]:
+                # Here 2nd condition is very logical for binary search
+                # 1st condition: if target < l then target is in rotated right part.
                 if target < nums[l] or target > nums[m]:
                     l = m + 1
                 else:
