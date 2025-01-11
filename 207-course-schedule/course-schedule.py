@@ -25,6 +25,7 @@ class Solution:
             return True
         
         for crs in range(numCourses):
+            # need to check all courses'dependancy
             if not dfs(crs):
                 return False
         return True
