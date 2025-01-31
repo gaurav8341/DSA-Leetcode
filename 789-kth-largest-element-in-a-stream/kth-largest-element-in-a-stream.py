@@ -14,15 +14,22 @@ class KthLargest:
 
     def add(self, val: int) -> int:
 
-        try:
-            min_num=self.heap[0]
-        except IndexError:
-            min_num = -1001
-        # only add element if eleemnet is geater than smallest umber
-        if min_num < val and len(self.heap) == self.k:
-            heapq.heappop(self.heap)
+        # try:
+        #     min_num=self.heap[0]
+        # except IndexError:
+        #     min_num = -1001
+        # # only add element if eleemnet is geater than smallest umber
+        # if min_num < val and len(self.heap) == self.k:
+        #     heapq.heappop(self.heap)
 
-        if len(self.heap) < self.k:
-            heapq.heappush(self.heap, val)
+        # if len(self.heap) < self.k:
+        #     heapq.heappush(self.heap, val)
+
+        # return self.heap[0]
+
+        heapq.heappush(self.heap, val)
+
+        if len(self.heap) > self.k:
+            heapq.heappop(self.heap)
 
         return self.heap[0]
