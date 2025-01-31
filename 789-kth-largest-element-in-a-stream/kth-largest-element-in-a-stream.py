@@ -13,7 +13,7 @@ class KthLargest:
             heapq.heappop(self.heap)
 
     def add(self, val: int) -> int:
-
+        # below is mine
         # try:
         #     min_num=self.heap[0]
         # except IndexError:
@@ -27,6 +27,7 @@ class KthLargest:
 
         # return self.heap[0]
 
+        # best solution on Leetcode
         heapq.heappush(self.heap, val)
 
         if len(self.heap) > self.k:
