@@ -6,13 +6,15 @@ class Solution:
             only insert if value is greater than root if size is full.
         """
 
-        heap = []
+        # heap = []
 
-        for n in nums:
-            if len(heap) == k:
-                if n > heap[0]:
-                    heapq.heappushpop(heap, n)
-            else:
-                heapq.heappush(heap, n)
+        # for n in nums:
+        #     if len(heap) == k:
+        #         if n > heap[0]:
+        #             heapq.heappushpop(heap, n)
+        #     else:
+        #         heapq.heappush(heap, n)
         
-        return heap[0]
+        # return heap[0]
+
+        return heapq.nlargest(k, nums)[-1]
