@@ -12,13 +12,6 @@ class Solution:
             l, r = l + 1, r - 1
         return True
 
-    """
-        How ?
-         before adding in set we need to check if substring is palindrome 
-         if the total length of subset == length of string then add it in res
-
-    """
-
     def partition(self, s: str) -> List[List[str]]:
         res = []
 
