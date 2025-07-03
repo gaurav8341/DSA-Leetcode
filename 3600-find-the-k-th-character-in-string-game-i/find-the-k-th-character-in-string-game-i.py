@@ -23,5 +23,12 @@ class Solution:
         # Each operation effectively adds the count of 1s in the binary representation of (k - 1) to the starting character 'a'
         # The number of operations needed corresponds to the number of bits in (k - 1)'s binary representation
         # Each '1' bit represents a character increment at that operation level
+
+
+        """
+        Correct! Fork=8, k−1=7
+        k−1=7 which is 111
+        111 in binary (three 1s), so the output is 'a' + 3 shifts = 'd'. \U0001f604
+        """
         return chr(ord('a') + (k - 1).bit_count())
 
