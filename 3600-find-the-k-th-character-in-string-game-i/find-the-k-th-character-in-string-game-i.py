@@ -7,6 +7,7 @@ class Solution:
                 return word[k-1]
             anti_word = ''
             for c in word:
-                a_c = (ord(c) + 1) % ord('a')
-                anti_word += chr(a_c + ord('a'))
+                a_c = (ord(c) + 1) % 97
+                # 97 is ascii value of a
+                anti_word += chr(a_c + 97)
             word += anti_word
