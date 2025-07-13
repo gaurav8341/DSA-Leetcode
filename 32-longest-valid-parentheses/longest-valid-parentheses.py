@@ -1,7 +1,7 @@
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
 
-        stack = [-1]
+        stack = [-1] # thi is necessary for case where length = len(s)
         length = 0
         for i, c in enumerate(s):
             if c == '(':
