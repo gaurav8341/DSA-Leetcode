@@ -8,7 +8,8 @@ class Solution:
                 stack.append(i)
             else:
                 if stack:
-                    top_idx = stack.pop()
+                    stack.pop()
+                    # one bracket pair closed
                 if stack:
                     length = max(length, i - stack[-1])
                 else:
