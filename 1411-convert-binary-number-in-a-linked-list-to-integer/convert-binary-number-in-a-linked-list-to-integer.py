@@ -9,7 +9,8 @@ class Solution:
         number = 0
         curr = head
         while curr:
-            # number = (number<<1) | curr.val
-            number = number*2 + curr.val
+            number = (number<<1) | curr.val 
+            # left shift 1 becomes 2, 2 becomes 4 and |(bitwise or) operator is equivalent of addition 
+            # number = number*2 + curr.val
             curr = curr.next
         return number
