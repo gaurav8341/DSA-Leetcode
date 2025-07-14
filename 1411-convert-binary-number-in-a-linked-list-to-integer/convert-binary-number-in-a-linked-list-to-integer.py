@@ -9,6 +9,7 @@ class Solution:
         number = 0
         curr = head
         while curr:
-            number = (number<<1) | curr.val
+            # number = (number<<1) | curr.val
+            number = number*2 + curr.val
             curr = curr.next
         return number
