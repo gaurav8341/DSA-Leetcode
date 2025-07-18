@@ -13,7 +13,11 @@ class Solution:
         #     dp[i] = dp[i-1] + dp[i-2]
         
         # return dp[n]
-        curr_i = 0
+
+        # now i got it
+        # there are how many ways to climb n stiars
+        # f(n) = f(n-1) + f(n-2) + ..... + f(1)
+        curr_i = 1 # if n= 1 or 0 then 1 way to climb
         prev2 = 1
         prev = 1
         for i in range(2, n+1):
@@ -21,7 +25,7 @@ class Solution:
             prev2 = prev
             prev = curr_i
         
-        return prev
+        return curr_i
         
         # steps = 0
         # res = 0
