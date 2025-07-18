@@ -1,156 +1,82 @@
-import heapq
 
+"""
+Diagram only:
+https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/solutions/1747029/python-explanation-with-pictures-priority-queue
+"""
 class Solution:
-    def minimumDifference(self, nums):
+    def minimumDifference(self, nums: List[int]) -> int:
         n3 = len(nums)
         n = n3 // 3
-
-        leftMin = [0] * n3
-        rightMin = [0] * n3
-
-        # Max heap for left part (invert numbers to simulate max-heap)
-        maxHeap = []
-        leftSum = 0
-        for i in range(n3):
-            heapq.heappush(maxHeap, -nums[i])
-            leftSum += nums[i]
-            if len(maxHeap) > n:
-                leftSum += heapq.heappop(maxHeap)
-            if i >= n - 1:
-                leftMin[i] = leftSum
-
-        # Min heap for right part
-        minHeap = []
-        rightSum = 0
-        for i in range(n3 - 1, -1, -1):
-            heapq.heappush(minHeap, nums[i])
-            rightSum += nums[i]
-            if len(minHeap) > n:
-                rightSum -= heapq.heappop(minHeap)
-            if i <= n3 - n:
-                rightMin[i] = rightSum
-
-        # Calculate minimum difference
-        result = float('inf')
-        print(leftMin, rightMin)
-        for i in range(n - 1, n3 - n):
-            result = min(result, leftMin[i] - rightMin[i + 1])
-
-        return result
-
-
-# class Solution:
-    # def minimumDifference(self, nums: List[int]) -> int:
-        # we can remove elements in any order 
-        # but the first - second calc must happen taking the order into account.
-
-        # we need least possible diff. 
-        # min detected heap selected
-
-        # un optimized soln would be 
-        # go through all possibilities and take the min one.
-
-        # minimize the diff betn sum of n smallest elem in lft third and sum of n largest elem in right third
-
-        # if we remove largest elem from left and smallest elem from right 
-        # this is solved. 
-        # If we had gauurenty if nums len will be even then this was easy 
-        # but that is not given. in midle half smallest elem will go to left and largest will go to right
-        """
-        n = len(nums) // 3
-        maxheap = [] # this is for left partition
-        leftMins = [0] * len(nums)
-        rightMaxs = [0] * len(nums)
-
-        leftsum = 0
-        for i in range(n):
-            heapq.heappush(maxheap, -nums[i])
-            leftsum += nums[i]
-        leftMins[n - 1] = leftsum
-
-        for i in range(n , len(nums) - n):
-            if nums[i] < -maxheap[0]:
-                # only the smallest elem be taken in second n elems
-                # here as we are taking the smaller number 
-                # we are discarding largest number taken in left sums
-                # more simplified view of below operation is 
-
-                # discard_large_number = heapq.heappop(maxleft) * -1
-                # leftsum += nums[i] - discard_large_number
-
-                leftsum += nums[i] + heapq.heappop(maxheap) 
-                heapq.heappush(maxheap, -nums[i])
-            leftMins[i] = leftsum
         
-        minheap = [] # this is for right partition
-        rightSum = 0
-        for i in range(2*n, len(nums)):
-            heapq.heappush(minheap, nums[i])
-            rightSum += nums[i]
-        rightMaxs[i] = rightSum
+        # to get the min diff. we basically need to 
+        #     1. extract largest numbers from left part
+        #     2. extract smallest numbers fro  right part
 
+        prefix_heap = [-v for v in nums[:n]]# max heap of first n elems
+        heapq.heapify(prefix_heap)
+        left_sum = sum(nums[:n])# sum of left part array
+        prefix_sum = [left_sum] # prefix sum array
 
-        for i in range(n , len(nums) - n):
-            if nums[i] > minheap[0]:
-                rightSum += nums[i] - heapq.heappop(minheap)
-                heapq.heappush(minheap, nums[i])
-            rightMaxs[i] = rightSum
-        
+        right_sum = sum(nums[2*n:]) # sum of right part array
+        suffix_sum = [right_sum]
+        suffix_heap = [v for v in nums[2*n:]]# min heap of first n elems
+        heapq.heapify(suffix_heap)
 
-        minDiff = float('inf')
-        print(leftMins, rightMaxs)
-        for i in range(n - 1, len(nums) - n):
-            minDiff = min(minDiff, leftMins[i] - rightMaxs[i + 1])
+        # We did the job of extreme ends of array. 
+        # mid part still in contention
 
-        return minDiff
-        """
-
-
-
-        # maxheap for right
-        # min heap for left
-
-        # we heapidy the nums array.
-        # the first n elements will be smallest 
-        # the second n elements are the one which we need to ignor
-
-        
-        # all this below bullshittery is kachara
-
-
-        # def get_diff(exclude_idx:List[int]) -> int:
-        #     first, second = 0, 0
-        #     f_idx = 0
-        #     idx = 0
-        #     while f_idx < n:
-        #         if idx in exclude_idx:
-        #             idx += 1
-        #             continue
-        #         first += nums[idx]
-        #         f_idx += 1
-        #         idx += 1
+        for i in range(n, 2*n):
+            if nums[i] < -prefix_heap[0]:
+                left_sum += nums[i] + prefix_heap[0]
+                heapq.heappop(prefix_heap)
+                heapq.heappush(prefix_heap, -nums[i])
+            prefix_sum.append(left_sum)
             
-        #     s_idx = 0
-
-        #     while s_idx < n:
-        #         if idx in exclude_idx:
-        #             idx += 1
-        #             continue
-        #         second += nums[idx]
-        #         s_idx += 1
-        #         idx += 1
-            
-        #     return first -  second
-
-        # # for i in range(len(nums)):
-        # #     for j in range(i+1, len(nums)):
-        # # get n eclude idx
-        # n 
-        # i = 0
-        # while i < n:
-
-
-
         
+        for i in range(2*n-1, n-1, -1):# range(n, 2*n)
+            if nums[i] > suffix_heap[0]:
+                right_sum += nums[i] - suffix_heap[0]
+                heapq.heappop(suffix_heap)
+                heapq.heappush(suffix_heap, nums[i])
+            suffix_sum.append(right_sum)
+        suffix_sum = suffix_sum[::-1]
 
-            
+        ans = math.inf
+        print(prefix_sum, suffix_sum)
+        for a, b in zip(prefix_sum, suffix_sum):
+            ans = min(ans, a - b)
+        return ans 
+    # def minimumDifference(self, A: List[int]) -> int:
+    #     n = len(A) // 3
+        
+    #     # Build pre_min using min-heap.
+    #     pre_min, cur_min = [sum(A[:n])], sum(A[:n])
+    #     pre_hp = [-x for x in A[:n]]
+    #     heapq.heapify(pre_hp)
+    #     for i in range(n, 2 * n):
+    #         print(i)
+    #         cur_pop = -heapq.heappop(pre_hp)
+    #         cur_min -= cur_pop
+    #         cur_min += min(cur_pop, A[i])
+    #         pre_min.append(cur_min)
+    #         heapq.heappush(pre_hp, -min(cur_pop, A[i]))          
+        
+    #     # Build suf_max.
+    #     suf_max, cur_max = [sum(A[2*n:])], sum(A[2*n:])
+    #     suf_hp = [x for x in A[2*n:]]
+    #     heapq.heapify(suf_hp)        
+    #     for i in range(2 * n - 1, n - 1, -1):
+    #         print(i)
+    #         cur_pop = heapq.heappop(suf_hp)
+    #         cur_max -= cur_pop
+    #         cur_max += max(cur_pop, A[i])
+    #         suf_max.append(cur_max)
+    #         heapq.heappush(suf_hp, max(cur_pop, A[i]))
+    #     suf_max = suf_max[::-1]
+        
+    #     # Iterate over pre_min and suf_max and get the minimum difference.
+    #     ans = math.inf
+    #     print(pre_min, suf_max)
+    #     for a, b in zip(pre_min, suf_max):
+    #         ans = min(ans, a - b)
+    #     return ans 
