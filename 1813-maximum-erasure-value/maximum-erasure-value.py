@@ -19,7 +19,7 @@ class Solution:
                 # c is in subarray
                 # we take old idx
                 # new_l = subarray[c] + 1
-            while nums[i] in subarray:
+            while c in subarray:
                 count -= nums[l]
                 subarray.remove(nums[l])
                 l += 1
