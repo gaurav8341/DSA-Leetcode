@@ -13,21 +13,21 @@ class Solution:
         count, max_count = 0, 0
         l = 0# we only need one index below i would act as our right idx
         for i in range(len(nums)):
-            c = nums[i]
+            # c = nums[i]
             # check if c is in subarray
             # if c in subarray:
                 # c is in subarray
                 # we take old idx
                 # new_l = subarray[c] + 1
-            while c in subarray:
+            while nums[i] in subarray:
                 count -= nums[l]
                 subarray.remove(nums[l])
                 l += 1
                 # l += 1
                 # now we have new l 
             # below operation should be performed in any case
-            subarray.add(c)
-            count += c
+            subarray.add(nums[i])
+            count += nums[i]
             max_count = max(count, max_count)
         
         return max_count
