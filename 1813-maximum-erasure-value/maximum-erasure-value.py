@@ -12,7 +12,8 @@ class Solution:
         subarray = set()
         count, max_count = 0, 0
         l = 0# we only need one index below i would act as our right idx
-        for i, c in enumerate(nums):
+        for i in range(len(nums)):
+            c = nums[i]
             # check if c is in subarray
             # if c in subarray:
                 # c is in subarray
