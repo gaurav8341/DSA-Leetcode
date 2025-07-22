@@ -11,7 +11,7 @@ class Solution:
         # lets do simple approach first
         subarray = dict()
         count, max_count = 0, 0
-        l, r = 0, 0 # r would be non incusive
+        l = 0# we only need one index below i would act as our right idx
         for i, c in enumerate(nums):
             # check if c is in subarray
             if c in subarray:
@@ -23,11 +23,9 @@ class Solution:
                     subarray.pop(nums[l], None)
                     l += 1
                 # now we have new l 
-                
-            # else:
+            # below operation should be performed in any case
             subarray[c] = i
             count += c
-                # r += 1
             max_count = max(count, max_count)
         
         return max_count
