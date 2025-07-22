@@ -9,22 +9,23 @@ class Solution:
         # then new lower boiund of sub array is elem_idx which is repeated + 1 
 
         # lets do simple approach first
-        subarray = dict()
+        subarray = set()
         count, max_count = 0, 0
         l = 0# we only need one index below i would act as our right idx
         for i, c in enumerate(nums):
             # check if c is in subarray
-            if c in subarray:
+            # if c in subarray:
                 # c is in subarray
                 # we take old idx
-                new_l = subarray[c] + 1
-                while l < new_l:
-                    count -= nums[l]
-                    subarray.pop(nums[l], None)
-                    l += 1
+                # new_l = subarray[c] + 1
+            while nums[i] in subarray:
+                count -= nums[l]
+                subarray.remove(nums[l])
+                l += 1
+                # l += 1
                 # now we have new l 
             # below operation should be performed in any case
-            subarray[c] = i
+            subarray.add(c)
             count += c
             max_count = max(count, max_count)
         
