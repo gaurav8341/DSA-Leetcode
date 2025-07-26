@@ -17,9 +17,8 @@ class Solution:
 
         # return res
 
-        res = 0
-        prev = None
-        cnt = 0
+        res = 1
+        prev = ''
         for c in word:
             if c == prev:
                 # cnt += 1
@@ -27,4 +26,4 @@ class Solution:
             else:
                 prev = c
         
-        return res + 1
+        return res
