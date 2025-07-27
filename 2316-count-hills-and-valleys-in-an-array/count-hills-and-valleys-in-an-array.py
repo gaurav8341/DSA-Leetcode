@@ -7,7 +7,6 @@ class Solution:
         cnt = 0
 
         while nextt < len(nums):
-            print(prev, curr, nextt, cnt)
             while nextt < len(nums) and nums[curr] == nums[nextt]:
                 nextt += 1
             
