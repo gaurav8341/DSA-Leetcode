@@ -20,9 +20,10 @@ class Solution:
             nonlocal count
             if i >= len(nums):
                 return 1 if bit_or == arr_bit_or else 0
-            # if bit_or == arr_bit_or:
-            #     # count += 1
-            #     return 1
+            if bit_or == arr_bit_or:
+                # count += 1
+                return 1 << (len(nums) - i)
+
             
             return backtrack(bit_or | nums[i], i+1) + backtrack(bit_or, i+1)
         
