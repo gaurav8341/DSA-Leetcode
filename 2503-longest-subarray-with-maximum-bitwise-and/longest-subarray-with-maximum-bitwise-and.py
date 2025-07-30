@@ -27,6 +27,7 @@ class Solution:
 
 
         # return max_count
+        # aaperently O(2*n) is faster than above O(n) approach
         maxi = max(nums)
         max_len = 0
         length = 0
