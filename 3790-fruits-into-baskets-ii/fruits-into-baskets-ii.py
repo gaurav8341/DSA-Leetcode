@@ -2,12 +2,12 @@ class Solution:
     def numOfUnplacedFruits(self, fruits: List[int], baskets: List[int]) -> int:
         n = len(fruits)
         count = 0
-        for i in range(n):
-            for j in range(n):
+        for f in fruits:
+            for idx, b in enumerate(baskets):
                 # print(fruits, baskets, i, j)
-                if fruits[i] <= baskets[j]:
+                if f <= b:
                     count += 1
-                    baskets[j] = 0
+                    baskets[idx] = 0
                     break
         
         return n - count
