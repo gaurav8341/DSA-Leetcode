@@ -5,12 +5,17 @@ class Solution:
 
         # we get bit representation of n # we count the ones in it
 
-        if n < 0:
+        if n <= 0:
             return False
-            
-        n_bin = Counter(bin(n))
 
-        if n_bin.get('1', 0) == 1:
-            return True
-        return False
+        while n % 2 == 0:
+            n = n // 2
+        return n == 1
+        
+
+        # n_bin = Counter(bin(n))
+
+        # if n_bin.get('1', 0) == 1:
+        #     return True
+        # return False
 
