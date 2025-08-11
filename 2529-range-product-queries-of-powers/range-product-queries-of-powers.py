@@ -24,19 +24,12 @@ class Solution:
                     prefix.append(1<<i)
             n = n//2
             i += 1
-        # print(n_b[::-1])
-        # for i, _b in enumerate(n_b):
-        #     if _b == 1:
-        #         if prefix:
-        #             prefix.append(prefix[-1] * (1<< i))
-        #         else:
-        #             prefix.append(1<<i)
         
         res = []
         for l, r in queries:
             den = 1
             if l > 0:
                 den = prefix[l-1]
-            ans = int((prefix[r]/den) % (10**9 + 7))
-            res.append(ans)
+            # ans = int((prefix[r]/den) % (10**9 + 7))
+            res.append( int((prefix[r]/den) % (10**9 + 7)))
         return res
