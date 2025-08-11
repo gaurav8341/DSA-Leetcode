@@ -14,17 +14,24 @@ class Solution:
         #             prefix.append(prefix[-1] * (1<< i))
         #         else:
         #             prefix.append(1<<i)
-        n_b = []
+        # n_b = []
+        i = 0
         while n > 0:
-            n_b.append(n%2)
-            n = n//2
-        print(n_b[::-1])
-        for i, _b in enumerate(n_b):
-            if _b == 1:
+            n_b = (n%2)
+            if n_b == 1:
                 if prefix:
                     prefix.append(prefix[-1] * (1<< i))
                 else:
                     prefix.append(1<<i)
+            n = n//2
+            i += 1
+        # print(n_b[::-1])
+        # for i, _b in enumerate(n_b):
+        #     if _b == 1:
+        #         if prefix:
+        #             prefix.append(prefix[-1] * (1<< i))
+        #         else:
+        #             prefix.append(1<<i)
         
         print(prefix)
 
