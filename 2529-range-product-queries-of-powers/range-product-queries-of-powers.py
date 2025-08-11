@@ -6,18 +6,28 @@ class Solution:
         # return do modulo 10^9 + 7
         # get product array using n
 
-        n_b = list(bin(n)[:1:-1]) # remove initial '0b' and reverse it ceil(log(n))
+        # n_b = list(bin(n)[:1:-1]) # remove initial '0b' and reverse it ceil(log(n))
         powers, prefix = [], []
+        # for i, _b in enumerate(n_b):
+        #     if _b == '1':
+        #         if prefix:
+        #             prefix.append(prefix[-1] * (1<< i))
+        #         else:
+        #             prefix.append(1<<i)
+        n_b = []
+        while n > 0:
+            n_b.append(n%2)
+            n = n//2
+        print(n_b[::-1])
         for i, _b in enumerate(n_b):
-            if _b == '1':
-                powers.append(1<<i)
+            if _b == 1:
                 if prefix:
                     prefix.append(prefix[-1] * (1<< i))
                 else:
                     prefix.append(1<<i)
+        
+        print(prefix)
 
-        # prefix = []
-        print(powers, prefix)
         res = []
         for l, r in queries:
             den = 1
