@@ -8,6 +8,7 @@ class Solution:
 
         # n_b = list(bin(n)[:1:-1]) # remove initial '0b' and reverse it ceil(log(n))
         prefix = []
+        MOD = 10**9 + 7
         # for i, _b in enumerate(n_b):
         #     if _b == '1':
         #         if prefix:
@@ -31,5 +32,5 @@ class Solution:
             if l > 0:
                 den = prefix[l-1]
             # ans = int((prefix[r]/den) % (10**9 + 7))
-            res.append( int((prefix[r]/den) % (10**9 + 7)))
+            res.append( int((prefix[r]/den) % MOD))
         return res
