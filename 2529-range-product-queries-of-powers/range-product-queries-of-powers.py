@@ -17,8 +17,7 @@ class Solution:
         # n_b = []
         i = 0
         while n > 0:
-            n_b = (n%2)
-            if n_b == 1:
+            if n % 2 == 1:
                 if prefix:
                     prefix.append(prefix[-1] * (1<< i))
                 else:
