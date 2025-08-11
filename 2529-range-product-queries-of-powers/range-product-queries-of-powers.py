@@ -7,7 +7,7 @@ class Solution:
         # get product array using n
 
         # n_b = list(bin(n)[:1:-1]) # remove initial '0b' and reverse it ceil(log(n))
-        powers, prefix = [], []
+        prefix = []
         # for i, _b in enumerate(n_b):
         #     if _b == '1':
         #         if prefix:
@@ -33,8 +33,6 @@ class Solution:
         #         else:
         #             prefix.append(1<<i)
         
-        print(prefix)
-
         res = []
         for l, r in queries:
             den = 1
