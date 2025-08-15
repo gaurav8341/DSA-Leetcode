@@ -10,4 +10,5 @@ class Solution:
         # return n == 1
         
         if n <= 0: return False
-        return math.log(n, 4) % 1 == 0 # check if x is integer ie whole number
+        x = math.log(n, 4) # 4 as base
+        return x % 1 == 0 # check if x is integer ie whole number
