@@ -8,6 +8,6 @@ class Solution:
         #     else:
         #         return False
         # return n == 1
+        
         if n <= 0: return False
-        x = math.log(n, 4) # 4 as base
-        return x % 1 == 0 # check if x is integer ie whole number
+        return math.log(n, 4) % 1 == 0 # check if x is integer ie whole number
