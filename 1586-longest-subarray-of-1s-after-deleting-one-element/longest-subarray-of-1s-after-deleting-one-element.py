@@ -16,19 +16,13 @@ class Solution:
         #     _max = max(_max, r - l) # as we are removing an elem we are not adding +1 
         # return _max
 
-        # class Solution:
+    #   class Solution:
     # def longestSubarray(self, nums: List[int]) -> int:
-        left, zeros, res = 0, 0, 0
-        
-        for right in range(len(nums)):
-            if nums[right] == 0:
-                zeros += 1
-            
-            while zeros > 1:
-                if nums[left] == 0:
-                    zeros -= 1
-                left += 1
-            
-            res = max(res, right - left)
-        
-        return res
+        n, l, zeros, ans=len(nums), 0, 0, 0
+        for r, x in enumerate(nums):
+            zeros+=(x==0)
+            while zeros>1:
+                zeros-=nums[l]==0
+                l+=1
+            ans=max(ans, r-l)
+        return ans
