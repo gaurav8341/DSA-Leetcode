@@ -16,19 +16,22 @@ class Solution:
                 if val in COLS_set[j]:
                     return False
                 
-                if i < 3:
-                    row = 0
-                elif i < 6:
-                    row = 1
-                else:
-                    row = 2
+
+                row = i // 3
+                col = j // 3
+                # if i < 3:
+                #     row = 0
+                # elif i < 6:
+                #     row = 1
+                # else:
+                #     row = 2
                 
-                if j < 3:
-                    col = 0
-                elif j < 6:
-                    col = 1
-                else:
-                    col = 2
+                # if j < 3:
+                #     col = 0
+                # elif j < 6:
+                #     col = 1
+                # else:
+                #     col = 2
 
                 if val in box_set[row][col]:
                     return False
