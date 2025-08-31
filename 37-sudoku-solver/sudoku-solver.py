@@ -1,52 +1,87 @@
 class Solution:
-    def solveSudoku(self, board: list[list[str]]) -> None:
-        n, N = 3, 9
-        rows = [[0] * (N + 1) for _ in range(N)]
-        cols = [[0] * (N + 1) for _ in range(N)]
-        boxes = [[0] * (N + 1) for _ in range(N)]
-        sudokuSolved = False
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        rows = [[0]*10 for _ in range(9)]
+        cols = [[0]*10 for _ in range(9)]
+        boxes = [[[0]*10 for _ in range(3)] for _ in range(3)]
+        empty_spaces = list()
 
-        def couldPlace(d, row, col):
-            idx = (row // n) * n + col // n
-            return rows[row][d] + cols[col][d] + boxes[idx][d] == 0
+        for i in range(9):
+            for j in range(9):
+                val = board[i][j]
+                if val == ".":
+                    empty_spaces.append((i, j))
+                    continue
+                else: val = int(val)
+                rows[i][val] += 1
+                cols[j][val] += 1
+                boxes[i//3][j//3][val] += 1
 
-        def placeNumber(d, row, col):
-            idx = (row // n) * n + col // n
-            rows[row][d] += 1
-            cols[col][d] += 1
-            boxes[idx][d] += 1
-            board[row][col] = str(d)
+        def isValid(row, col, c):
+            nonlocal rows, cols, boxes
+            if rows[row][c]:
+                return False
+            if cols[col][c]:
+                return False
+            if boxes[row//3][col//3][c]:
+                return False
+            return True
+        
+        def set_number(r, c, val):
+            nonlocal rows, cols, boxes
+            rows[r][val] += 1
+            cols[c][val] += 1
+            boxes[r//3][c//3][val] += 1
+            # rows[r].add(val)
+            # cols[c].add(val)
+            # boxes[r//3][c//3].add(val)
+            # print(rows)
+        
+        def reset_number(r, c, val):
+            nonlocal rows, cols, boxes
+            # print(rows, r, c, val)
+            rows[r][val] -= 1
+            cols[c][val] -= 1
+            boxes[r//3][c//3][val] -= 1
+            # rows[r].remove(val)
+            # cols[c].remove(val)
+            # boxes[r//3][c//3].remove(val)
+           
 
-        def removeNumber(d, row, col):
-            idx = (row // n) * n + col // n
-            rows[row][d] -= 1
-            cols[col][d] -= 1
-            boxes[idx][d] -= 1
-            board[row][col] = '.'
+        # def solve(board):
+        #     nonlocal empty_spaces
+        #     if not empty_spaces:
+        #         return True
+        #     i, j = empty_spaces.pop()
+        #     # print(i, j, empty_spaces)
+        #     # for i in range(9):
+        #     #     for j in range(9):
+        #     # if board[i][j] == '.':
+        #     for c in range(1, 10):
+        #         if isValid(i, j, c):
+        #             set_number(i, j, c)
+        #             board[i][j] = str(c)
+        #             if solve(board): return True
+        #             board[i][j] = '.'
+        #             reset_number(i, j, c)
+        #             # break
+        #     empty_spaces.add((i, j))
 
-        def placeNextNumbers(row, col):
-            nonlocal sudokuSolved
-            if row == N - 1 and col == N - 1:
-                sudokuSolved = True
-            elif col == N - 1:
-                backtrack(row + 1, 0)
-            else:
-                backtrack(row, col + 1)
+            # return False
+            # return True
+        
+        def solve(board, idx=0):
+            if idx == len(empty_spaces):
+                return True
 
-        def backtrack(row, col):
-            nonlocal sudokuSolved
-            if board[row][col] == '.':
-                for d in range(1, 10):
-                    if couldPlace(d, row, col):
-                        placeNumber(d, row, col)
-                        placeNextNumbers(row, col)
-                        if not sudokuSolved:
-                            removeNumber(d, row, col)
-            else:
-                placeNextNumbers(row, col)
+            i, j = empty_spaces[idx]
+            for c in range(1, 10):
+                if isValid(i, j, c):
+                    set_number(i, j, c)
+                    board[i][j] = str(c)
+                    if solve(board, idx + 1):
+                        return True
+                    board[i][j] = "."
+                    reset_number(i, j, c)
+            return False
 
-        for i in range(N):
-            for j in range(N):
-                if board[i][j] != '.':
-                    placeNumber(int(board[i][j]), i, j)
-        backtrack(0, 0)
+        solve(board, 0)
