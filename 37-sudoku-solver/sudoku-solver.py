@@ -45,29 +45,6 @@ class Solution:
             # rows[r].remove(val)
             # cols[c].remove(val)
             # boxes[r//3][c//3].remove(val)
-           
-
-        # def solve(board):
-        #     nonlocal empty_spaces
-        #     if not empty_spaces:
-        #         return True
-        #     i, j = empty_spaces.pop()
-        #     # print(i, j, empty_spaces)
-        #     # for i in range(9):
-        #     #     for j in range(9):
-        #     # if board[i][j] == '.':
-        #     for c in range(1, 10):
-        #         if isValid(i, j, c):
-        #             set_number(i, j, c)
-        #             board[i][j] = str(c)
-        #             if solve(board): return True
-        #             board[i][j] = '.'
-        #             reset_number(i, j, c)
-        #             # break
-        #     empty_spaces.add((i, j))
-
-            # return False
-            # return True
         
         def solve(board, idx=0):
             if idx == len(empty_spaces):
