@@ -1,5 +1,4 @@
 import heapq
-from functools import cmp_to_key
 
 class Solution:
 
@@ -18,9 +17,12 @@ class Solution:
         avg = 0.0 
         classheap = []
         for pass_, total in classes:
-            heapq.heappush(classheap, (self.calculate_gain(pass_, total) * -1, pass_, total))
+            # heapq.heappush(classheap, (self.calculate_gain(pass_, total) * -1, pass_, total))
+            classheap.append((self.calculate_gain(pass_, total) * -1, pass_, total))
             avg += pass_/total
 
+        heapq.heapify(classheap)
+        
         for _ in range(extraStudents):
 
             gain, pass_, total = heapq.heappop(classheap)
